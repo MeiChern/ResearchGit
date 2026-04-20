@@ -1,0 +1,33 @@
+name: Build paper PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "examples/hello-paper/**"
+      - ".github/workflows/build-paper.yml"
+  pull_request:
+    paths:
+      - "examples/hello-paper/**"
+      - ".github/workflows/build-paper.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Typst
+        uses: typst-community/setup-typst@v3
+
+      - name: Compile paper.typ
+        working-directory: examples/hello-paper
+        run: typst compile paper.typ paper.pdf
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-paper-pdf
+          path: examples/hello-paper/paper.pdf

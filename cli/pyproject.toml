@@ -1,0 +1,35 @@
+[project]
+name = "draftgit"
+version = "0.1.0"
+description = "DraftGit: a Git-native manuscript workflow for academic papers"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Mei Chern" }]
+keywords = ["git", "latex", "typst", "markdown", "manuscript", "academic", "writing"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Markup :: LaTeX",
+]
+dependencies = [
+    "click>=8.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/MeiChern/ResearchGit"
+Issues = "https://github.com/MeiChern/ResearchGit/issues"
+
+[project.scripts]
+draftgit = "draftgit.cli:main"
+
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["draftgit"]

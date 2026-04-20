@@ -2,7 +2,9 @@
 
 ## For / Who / Unlike
 
-For a **PhD student revising a single paper across many rounds of feedback** (advisor, co-authors, reviewers), ResearchGit is a **Git-native manuscript workflow** (a small CLI + repo templates on top of Git and GitHub) that **makes each revision a reviewable, inspectable, reversible unit of work** — unlike **Overleaf** (which compresses author edits into a single linear history) or **Google Docs** (which isn't text-first and doesn't fit Typst, LaTeX, or Markdown).
+For a **PhD student revising a single paper across many rounds of feedback** (advisor, co-authors, reviewers), DraftGit is a **Git-native manuscript workflow** (a small CLI + repo templates on top of Git and GitHub) that **makes each revision a reviewable, inspectable, reversible unit of work** — unlike **Overleaf** (which compresses author edits into a single linear history) or **Google Docs** (which isn't text-first and doesn't fit Typst, LaTeX, or Markdown).
+
+ResearchGit is the parent brand; **DraftGit** is the v1 product and the name of the CLI itself.
 
 ## The One User We're Building For
 
@@ -12,21 +14,31 @@ If a feature only matters when there are 5+ co-authors, 3+ papers, cross-lab sha
 
 ## What V1 Ships
 
-ResearchGit is **a thin CLI on top of Git + GitHub, not a replacement for either.** You keep using VS Code, `git`, `gh`, and GitHub's web UI. ResearchGit adds academic-specific verbs where vanilla Git is awkward.
+DraftGit is **a thin CLI on top of Git + GitHub, not a replacement for either.** You keep using VS Code, `git`, `gh`, and GitHub's web UI. DraftGit adds academic-specific verbs where vanilla Git is awkward.
 
 V1 ships:
 
-1. **A CLI called `rg`** with exactly four verbs:
-    - `rg new <paper-name> [--format typst|latex|markdown]` — scaffold a paper repo and create a **private** GitHub repo
-    - `rg build` — detect format, compile to PDF locally
-    - `rg cite add <doi-or-url>` — fetch metadata from CrossRef and append to `references.bib`
-    - `rg submit <name>` — create an annotated Git tag `submit/<name>` for submission tracking (signed if the user has a GPG key configured)
-2. **Paper templates for Typst, LaTeX, and Markdown** — `rg new` scaffolds from these
+1. **A CLI called `draftgit`** with exactly four verbs:
+    - `draftgit new <paper-name> [--format typst|latex|markdown]` — scaffold a paper directory and create a **private** GitHub repo
+    - `draftgit build` — detect format, compile to PDF locally
+    - `draftgit cite add <doi-or-url>` — fetch metadata from CrossRef and append to `references.bib`
+    - `draftgit submit <name>` — create an annotated Git tag `submit/<name>` for submission tracking (signed if the user has a GPG key configured)
+2. **Paper templates for Typst, LaTeX, and Markdown** — `draftgit new` scaffolds from these
 3. **GitHub Action templates for each format** — auto-build PDF on push and attach as an artifact
-4. **Private-by-default repos** — `rg new` always creates `--private`; going public is an explicit step
+4. **Private-by-default repos** — `draftgit new` always creates `--private`; going public is an explicit `--public` flag
 5. **A plain-language workflow guide** for co-authors who don't know Git
 
-Everything else — branching, PRs, conflict resolution, issue tracking — is vanilla Git and GitHub. ResearchGit **sits alongside** the existing ecosystem, it does not try to replace it.
+Everything else — branching, PRs, conflict resolution, issue tracking — is vanilla Git and GitHub. DraftGit **sits alongside** the existing ecosystem, it does not try to replace it.
+
+## Naming Decisions
+
+- **Parent brand:** ResearchGit
+- **Product/CLI brand:** DraftGit
+- **PyPI package:** `draftgit`
+- **Installed binary:** `draftgit`
+- **Docs primary form:** `draftgit new thesis`
+
+We do **not** ship a `git-draft` subcommand alias: although Git supports external `git-*` commands on PATH, the `git-draft` slug on PyPI is already taken by an unrelated code-assistant tool, and reusing that name would reintroduce the collision problem we chose `draftgit` to avoid. Users who want a Git-style shorthand can set a local alias themselves (`git config alias.draft '!draftgit'`) — that's their choice, not a shipped default.
 
 ## The CLI Discipline Rule
 
@@ -34,27 +46,28 @@ Everything else — branching, PRs, conflict resolution, issue tracking — is v
 
 ## A Day In The Life (V1)
 
-1. `rg new my-paper --format typst`. A private GitHub repo appears with scaffolding and CI. Student clones it in VS Code.
-2. Student writes the first draft in `paper.typ`, using VS Code's Typst extension. `rg build` gives a local PDF preview. Push.
+1. `draftgit new my-paper --format typst`. A private GitHub repo appears with scaffolding and CI. Student clones it in VS Code.
+2. Student writes the first draft in `paper.typ`, using VS Code's Typst extension. `draftgit build` gives a local PDF preview. Push.
 3. CI compiles the PDF and attaches it as a downloadable artifact on the commit.
-4. `rg cite add 10.1234/foo` → CrossRef metadata lands in `references.bib`. Push. PDF rebuilds.
+4. `draftgit cite add 10.1234/foo` → CrossRef metadata lands in `references.bib`. Push. PDF rebuilds.
 5. Advisor (invited via GitHub) opens a PR titled "Methods section feedback." Student reviews each change inline, merges.
-6. At submission: `rg submit iclr-2026`. Annotated tag `submit/iclr-2026` is created with date + message. The tagged PDF is archived by CI.
+6. At submission: `draftgit submit iclr-2026`. Annotated tag `submit/iclr-2026` is created with date + message. The tagged PDF is archived by CI.
 7. Six months later when a reviewer asks "which version did we submit?", `git checkout submit/iclr-2026` returns the exact paper bit-for-bit.
 
 ## In Scope (V1)
 
-- `rg` CLI with four verbs: `new`, `build`, `cite add`, `submit`
+- `draftgit` CLI with four verbs: `new`, `build`, `cite add`, `submit`
 - Paper templates for Typst, LaTeX, and Markdown
 - GitHub Action templates for each format
 - Private-by-default repo creation via `gh` under the hood
-- `rg cite add` backed by the public CrossRef API (no API key required)
+- `draftgit cite add` backed by the public CrossRef API (no API key required)
 - Plain-language workflow guide for non-Git co-authors
 - Works alongside VS Code / JetBrains / command-line Git without custom plugins
 
 ## Out Of Scope (V1)
 
 - **A fifth CLI verb.** Any proposed expansion waits on the pain log.
+- **A `git-draft` subcommand alias.** See "Naming Decisions" above.
 - Custom VS Code / JetBrains extensions — existing Git integrations are sufficient
 - GitLab / Bitbucket / self-hosted Git support — GitHub only in v1; multi-host is v1.1+
 - Peer review rebuttal tooling — v2
@@ -63,7 +76,7 @@ Everything else — branching, PRs, conflict resolution, issue tracking — is v
 - Reference-manager parity with Zotero / Mendeley — not a goal
 - Multi-paper / lab-wide shared libraries — v2
 - DOCX round-tripping — never
-- Custom Git server or hosted ResearchGit platform — use GitHub
+- Custom Git server or hosted DraftGit platform — use GitHub
 
 ## How We'll Know V1 Works
 
@@ -73,15 +86,15 @@ The author writes a real paper using v1 (the dogfood test). v1 is done when:
 2. A co-author who doesn't know Git can leave comments and suggest edits via GitHub's PR UI with under 15 minutes of onboarding.
 3. Answering "what did the paper look like on date X?" takes under 10 seconds via `git log` or `git checkout`.
 4. `docs/pain-log.md` has at least 10 entries — real friction discovered by using the tool, which becomes the v1.1 backlog.
-5. At least one external PhD student (not the author) completes a paper cycle with ResearchGit and would recommend it to their advisor.
+5. At least one external PhD student (not the author) completes a paper cycle with DraftGit and would recommend it to their advisor.
 
 ## Implementation Choices
 
-- **CLI language: Python.** Fastest path from zero to shipping for a new engineer, huge ecosystem, `click` makes argument parsing trivial, `requests` makes the CrossRef call trivial, `pipx install researchgit` is a one-line install for users. Rust or Go can come later if performance matters (it won't for v1).
-- **GitHub operations via `gh` CLI.** `rg new` shells out to `gh repo create --private`. Keeps ResearchGit thin and avoids reimplementing GitHub's auth.
-- **Build dispatch via filesystem detection.** `rg build` looks for `paper.typ`, `main.tex`, or `paper.md` and picks a compiler accordingly. No format config file needed in v1.
+- **CLI language: Python.** Fastest path from zero to shipping for a new engineer, huge ecosystem, `click` makes argument parsing trivial, `requests` makes the CrossRef call trivial, `pipx install draftgit` is a one-line install for users. Rust or Go can come later if performance matters (it won't for v1).
+- **GitHub operations via `gh` CLI.** `draftgit new` shells out to `gh repo create --private`. Keeps DraftGit thin and avoids reimplementing GitHub's auth. Auth is **not** inherited magically — it flows only because we explicitly shell out to `gh` and read `git config`.
+- **Build dispatch via filesystem detection.** `draftgit build` looks for `paper.typ`, `main.tex`, or `paper.md` and picks a compiler accordingly. No format config file needed in v1.
 - **Privacy: private-by-default, explicit opt-in to public.** Protects pre-publication work by default.
-- **Signing: optional.** `rg submit` checks `git config user.signingkey`. If set, tag is GPG-signed. If not, plain annotated tag. No new crypto dependencies in v1.
+- **Signing: optional.** `draftgit submit` checks `git config user.signingkey`. If set, tag is GPG-signed. If not, plain annotated tag. No new crypto dependencies in v1.
 
 ## Supported Formats
 
@@ -91,4 +104,4 @@ All three ship at v1 launch:
 - **LaTeX** — still the dominant academic format. Shipping without it would cut off most of the target audience.
 - **Markdown** (via Pandoc) — lowest barrier to entry, familiar to anyone who's written a README.
 
-The cost of three formats is three templates + three CI workflows to maintain. That's acceptable because templates are static, CI configs are ~15 lines each, and the `rg build` dispatcher is a single switch statement.
+The cost of three formats is three templates + three CI workflows to maintain. That's acceptable because templates are static, CI configs are ~15 lines each, and the `draftgit build` dispatcher is a single switch statement.

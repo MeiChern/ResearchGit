@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResearchGit Project Intro</title>
+    <link rel="stylesheet" href="./vendor/reveal/dist/reset.css" />
+    <link rel="stylesheet" href="./vendor/reveal/dist/reveal.css" />
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="cover">
+          <p class="eyebrow">Academic Writing Infrastructure</p>
+          <h1>ResearchGit</h1>
+          <p class="subtitle">
+            Version control, collaboration, and citation management for academic
+            papers
+          </p>
+          <div class="meta-row">
+            <div>
+              <span class="meta-label">Format</span>
+              <span class="meta-value">Reveal.js showcase deck</span>
+            </div>
+            <div>
+              <span class="meta-label">Focus</span>
+              <span class="meta-value">Engineering workflows for research</span>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="grid-two">
+            <div>
+              <p class="eyebrow">Problem</p>
+              <h2>Academic papers still rely on fragile document workflows</h2>
+            </div>
+            <div>
+              <ul class="accent-list">
+                <li>Drafts split across files, folders, and email attachments</li>
+                <li>Citation edits are hard to trace and easy to break</li>
+                <li>Collaboration lacks clear history and ownership</li>
+                <li>Reviewer feedback gets buried outside the writing workflow</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="grid-two">
+            <div>
+              <p class="eyebrow">Solution</p>
+              <h2>ResearchGit adapts software version control to paper writing</h2>
+            </div>
+            <div>
+              <ul class="accent-list">
+                <li>Track every revision of a manuscript with commit history</li>
+                <li>Use branches for sections, experiments, or response rounds</li>
+                <li>Manage citations as structured assets instead of manual edits</li>
+                <li>Make collaboration auditable, reviewable, and reproducible</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Core Features</p>
+          <h2>Built for research teams, not generic source code alone</h2>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h3>Versioned manuscripts</h3>
+              <p>Restore earlier drafts, compare revisions, and preserve decision history.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Branching by section</h3>
+              <p>Write Introduction, Methods, and Discussion in parallel without collisions.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Citation-aware workflow</h3>
+              <p>Keep references structured and ready for BibTeX or similar formats.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Team collaboration</h3>
+              <p>See who changed what, coordinate edits, and incorporate feedback cleanly.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Typical Workflow</p>
+          <h2>Simple commands, research-specific outcomes</h2>
+          <div class="workflow-grid">
+            <article class="workflow-card">
+              <h3>Initialize</h3>
+              <pre><code>researchgit init</code></pre>
+              <p>Start a paper project with version control from day one.</p>
+            </article>
+            <article class="workflow-card">
+              <h3>Save progress</h3>
+              <pre><code>researchgit add
+researchgit commit -m "draft methods"</code></pre>
+              <p>Capture paper edits, new figures, or reference updates with intent.</p>
+            </article>
+            <article class="workflow-card">
+              <h3>Collaborate</h3>
+              <pre><code>researchgit push
+researchgit pull</code></pre>
+              <p>Sync changes through a shared repository for distributed co-authors.</p>
+            </article>
+            <article class="workflow-card">
+              <h3>Parallelize</h3>
+              <pre><code>researchgit branch
+researchgit merge</code></pre>
+              <p>Develop sections independently, then merge into the main manuscript.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="grid-two">
+            <div>
+              <p class="eyebrow">Benefits</p>
+              <h2>Why this is better than ad hoc file sharing</h2>
+            </div>
+            <div>
+              <ul class="accent-list">
+                <li>Safer revision history with rollback and recovery</li>
+                <li>Cleaner collaboration with fewer conflicting edits</li>
+                <li>More reliable citation and bibliography handling</li>
+                <li>Built-in backup and cloud-synced project continuity</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Engineering Mindset</p>
+          <h2>Make academic research flow more like disciplined software delivery</h2>
+          <div class="feature-grid">
+            <article class="feature-card">
+              <h3>Version control + reviews</h3>
+              <p>Apply pull-request style review to manuscript revisions and comments.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Agile research planning</h3>
+              <p>Break work into trackable tasks, milestones, and sprint-sized goals.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Structured documentation</h3>
+              <p>Keep notes, methods, and decisions in Markdown or LaTeX alongside the paper.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Automation-first reporting</h3>
+              <p>Generate summaries, status updates, and reproducible outputs automatically.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">AI Automation Layer</p>
+          <h2>ResearchGit can become an AI-friendly platform for academic workflows</h2>
+          <div class="grid-two compact">
+            <div>
+              <h3>Research acceleration</h3>
+              <ul class="accent-list small">
+                <li>Literature search and summarization</li>
+                <li>Citation recommendations and bibliography updates</li>
+                <li>Drafting support for sections and abstracts</li>
+                <li>Consistency and plagiarism checks</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Operational automation</h3>
+              <ul class="accent-list small">
+                <li>Data collection, cleaning, and formatting</li>
+                <li>Review assistance for clarity, bias, and structure</li>
+                <li>Task prioritization and bottleneck detection</li>
+                <li>Submission and reporting pipelines</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <p class="eyebrow">Platform View</p>
+          <h2>What the end-to-end system could include</h2>
+          <div class="platform-stack">
+            <div class="stack-layer">Submission pipeline for journals and conferences</div>
+            <div class="stack-layer">Collaboration hub with review, task tracking, and history</div>
+            <div class="stack-layer">AI services for analysis, writing support, and quality checks</div>
+            <div class="stack-layer">Centralized repository for manuscripts, data, and references</div>
+          </div>
+        </section>
+
+        <section>
+          <div class="grid-two">
+            <div>
+              <p class="eyebrow">Roadmap</p>
+              <h2>Build in stages, validate with real collaborators</h2>
+            </div>
+            <div>
+              <ol class="number-list">
+                <li>Implement project initialization and revision tracking.</li>
+                <li>Add branching and merging flows for collaborative writing.</li>
+                <li>Integrate citation management through BibTeX-style references.</li>
+                <li>Support remote sync, review loops, and team feedback.</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="closing">
+          <p class="eyebrow">Closing</p>
+          <h2>ResearchGit aims to make paper development reproducible, collaborative, and automation-ready</h2>
+          <p class="closing-text">
+            The goal is not just a better writing tool. It is a research workflow
+            platform that treats papers with the same rigor modern teams apply to
+            software.
+          </p>
+          <p class="callout">Next step: prototype with a small research team and iterate from real usage.</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="./vendor/reveal/dist/reveal.js"></script>
+    <script>
+      const deck = new Reveal({
+        hash: true,
+        controls: true,
+        progress: true,
+        center: true,
+        transition: "slide",
+        backgroundTransition: "fade",
+        width: 1440,
+        height: 810,
+        margin: 0.06,
+      });
+
+      deck.initialize();
+    </script>
+  </body>
+</html>

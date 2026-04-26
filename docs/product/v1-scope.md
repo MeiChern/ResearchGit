@@ -12,9 +12,27 @@ One PhD student, writing one paper, with one advisor and maybe one co-author. Ev
 
 If a feature only matters when there are 5+ co-authors, 3+ papers, cross-lab sharing, or hosted infrastructure — it's v2 or later.
 
-## What V1 Ships
+## Current Increment: v0.1
 
 DraftGit is **a thin CLI on top of Git + GitHub, not a replacement for either.** You keep using VS Code, `git`, `gh`, and GitHub's web UI. DraftGit adds academic-specific verbs where vanilla Git is awkward.
+
+The current implementation target is **v0.1**, not the full v1. v0.1 exists to prove that DraftGit can create a useful, private-by-default manuscript repository with a clean starter structure.
+
+v0.1 ships:
+
+1. **A CLI called `draftgit`** with one implemented verb:
+    - `draftgit new <paper-name> [--format typst|latex|markdown]` — scaffold a paper directory, initialize Git, and optionally create a **private** GitHub repo
+2. **Starter paper templates for Typst, LaTeX, and Markdown**
+3. **A Typst GitHub Action template** for the primary reference workflow
+4. **Private-by-default repo creation** via `gh`, with explicit `--public` opt-in
+5. **Discovery stubs** for planned verbs:
+    - `draftgit build`
+    - `draftgit cite add <doi-or-url>`
+    - `draftgit submit <name>`
+
+The stubs are intentional. They reserve the product vocabulary without pretending the workflow is already complete.
+
+## What V1 Ships
 
 V1 ships:
 
@@ -29,6 +47,18 @@ V1 ships:
 5. **A plain-language workflow guide** for co-authors who don't know Git
 
 Everything else — branching, PRs, conflict resolution, issue tracking — is vanilla Git and GitHub. DraftGit **sits alongside** the existing ecosystem, it does not try to replace it.
+
+## Milestone Path To V1
+
+The implementation should grow in order of academic workflow risk, not in order of how easy the code looks.
+
+1. **v0.1: scaffold** — `draftgit new` creates a usable manuscript repo and sets the private-by-default habit.
+2. **v0.2: build** — `draftgit build` detects the paper format and compiles to `paper.pdf` locally.
+3. **v0.3: submit** — `draftgit submit <name>` creates an annotated `submit/<name>` tag after checking the manuscript state.
+4. **v0.4: cite** — `draftgit cite add <doi-or-url>` adds conservative CrossRef-backed BibTeX entries with duplicate protection.
+5. **v1.0: dogfood release** — the full four-verb workflow has been used on at least one real paper cycle and documented for a non-Git co-author.
+
+`cite add` comes after `build` and `submit` because citation automation is deceptively messy in real academic work: DOI metadata can be incomplete, preprints and journal versions collide, BibTeX keys need to stay stable, and duplicate detection must be trustworthy.
 
 ## Naming Decisions
 
@@ -63,6 +93,15 @@ We do **not** ship a `git-draft` subcommand alias: although Git supports externa
 - `draftgit cite add` backed by the public CrossRef API (no API key required)
 - Plain-language workflow guide for non-Git co-authors
 - Works alongside VS Code / JetBrains / command-line Git without custom plugins
+
+## In Scope (v0.1)
+
+- `draftgit new`
+- Typst, LaTeX, and Markdown starter files
+- Git initialization and initial commit
+- Optional GitHub repo creation through `gh`
+- Private-by-default repo creation
+- Clear stubs for `build`, `cite add`, and `submit`
 
 ## Out Of Scope (V1)
 
